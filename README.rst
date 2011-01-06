@@ -30,7 +30,7 @@ Ok I know that is pure nonsense but I had to come up with a compelling
 reason to build this thing in the first place.
 
 So moving swiftly forward, with a static handler implemented as a 
-pluggable bottle app, I would be able to do the following:
+pluggable bottle app, I would be able to do the following::
 
     import bottle
     
@@ -99,4 +99,4 @@ Create an application module "app.py" with the contents::
 
 -----
 
-Copyright (c) 2010-2011 - Rudy Lattae. Released under the New BSD License.
+Copyright (c) 2011 - Rudy Lattae. Released under the New BSD License.
