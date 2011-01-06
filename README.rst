@@ -2,7 +2,7 @@
 Overview
 ========
 
-bottle-servefiles can serve static files for your bottle.py application.
+**bottle-servefiles** can serve static files for your bottle.py application.
 
 I deceided to create this application to further my understanding 
 of WSGI and how to build pluggable apps for the bottle.py ecosystem.

@@ -15,7 +15,7 @@ setup(
     long_description = long_description,
     author = "Rudy Lattae",
     author_email = "rudylattae@gmail.com",
-    url = 'http://example.com',
+    url = 'https://bitbucket.org/rudylattae/bottle-servefiles',
     license = "Simplified BSD",
     keywords = ['bottle', 'bottle.py', 'static', 'file', 'files', 'web', 'app'],
     classifiers = [
