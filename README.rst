@@ -2,12 +2,12 @@
 Overview
 ========
 
-bottle-staticapp can serve static files for your bottle.py application.
+bottle-servefiles can serve static files for your bottle.py application.
 
 I deceided to create this application to further my understanding 
 of WSGI and how to build pluggable apps for the bottle.py ecosystem.
 
-Staticapp aims to be a simple WSGI app that can be mounted into any 
+bottle-servefiles aims to be a simple WSGI app that can be mounted into any 
 bottle.py powered app in order to serve static files from any url.
 
 For instance in a regualar bottle.py app you may have the code below 
@@ -37,7 +37,7 @@ pluggable bottle app, I would be able to do the following:
     ...
     
     myapp = bottle.default_app()
-    myapp.mount(bottle.load_app('staticapp'), '/media')
+    myapp.mount(bottle.load_app('servefiles'), '/media')
     bottle.run(app=myapp)
     
 It doesn't look like much, but with a pluggable app, it now becomes 
@@ -54,15 +54,15 @@ Features
 Installation
 ============
 
-You can install upgrade or uninstall bottle-staticapp with these commands::
+You can install upgrade or uninstall bottle-servefiles with these commands::
 
-    > pip install bottle-staticapp
-    > pip install -U bottle-staticapp
-    > pip uninstall bottle-staticapp
+    > pip install bottle-servefiles
+    > pip install -U bottle-servefiles
+    > pip uninstall bottle-servefiles
 
 If you do not have pip you may use easy install::
 
-    > easy_install bottle-staticapp
+    > easy_install bottle-servefiles
 
 If you do not have easy_install, you may download the piot 
 source distribution archive. Extract it and run::
@@ -73,7 +73,7 @@ source distribution archive. Extract it and run::
 Example usage 
 =============
 
-This is a basic outline of how you would use bottle-staticapp 
+This is a basic outline of how you would use bottle-servefiles 
 to server static files from your application.
 
 Create an application module "app.py" with the contents::
@@ -91,7 +91,7 @@ Create an application module "app.py" with the contents::
     
     if __name__ == '__main__':
         mysite = MySite()
-        mysite.app.mount(bottle.load_app('staticapp.app'), '/__media')
+        mysite.app.mount(bottle.load_app('servefiles'), '/__media')
         bottle.debug(True)
         bottle.run(app=foo, reloader=True)
     

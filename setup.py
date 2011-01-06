@@ -9,7 +9,7 @@ long_description = '\n\n'.join([
 ])
 
 setup(
-    name = "bottle-staticapp",
+    name = "bottle-servefiles",
     version = version,
     description = "A reusable app that serves static files for bottle apps",
     long_description = long_description,
@@ -17,7 +17,7 @@ setup(
     author_email = "rudylattae@gmail.com",
     url = 'http://example.com',
     license = "Simplified BSD",
-    keywords = ['static file', 'bottle', 'bottle.py', 'website', 'web application'],
+    keywords = ['bottle', 'bottle.py', 'static', 'file', 'files', 'web', 'app'],
     classifiers = [
         'Development Status :: 1 - Planning',
         'Environment :: Web Environment',
