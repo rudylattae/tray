@@ -4,8 +4,7 @@ from setuptools import setup
 version = '0.1.0dev'
 long_description = '\n\n'.join([
     open('README.rst').read(),
-    open('CHANGES.txt').read(),
-    open('TODO.txt').read(),
+    open('CHANGES.txt').read()
 ])
 
 setup(
