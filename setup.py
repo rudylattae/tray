@@ -1,7 +1,7 @@
 import os
 from setuptools import setup
 
-version = '0.0.1dev'
+version = '0.1.0dev'
 long_description = '\n\n'.join([
     open('README.rst').read(),
     open('CHANGES.txt').read(),
@@ -19,7 +19,7 @@ setup(
     license = "Simplified BSD",
     keywords = ['bottle', 'bottle.py', 'static', 'file', 'files', 'web', 'app'],
     classifiers = [
-        'Development Status :: 1 - Planning',
+        'Development Status :: 2 - Pre-Alpha',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
