@@ -27,8 +27,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
     ],
-    package_dir = {'': 'src'},
-    packages = [''],
+    py_modules = ['bottle_servefiles'],
     zip_safe = False,
     install_requires = [],
 )
