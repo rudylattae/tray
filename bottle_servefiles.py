@@ -9,14 +9,14 @@ _config = {
 }
 
 
-class Controller:
-    """The application controller"""
+class StaticFileRepository:
+    """This repository is home to our core business logic"""
     def __init__(self, config):
         if not os.path.exists(config['root_dir']):
             raise Exception("Crap")
         self.root_dir = config['root_dir']
     
-    def process(self, filename):
+    def get(self, filename):
         return static_file(filename, root=self.root_dir)
         
 
@@ -30,17 +30,17 @@ def create_app(config={}):
     cfg.update(config)
     
     app = Bottle()
-    ctrl = Controller(cfg)
+    repo = StaticFileRepository(cfg)
     
-    @app.route('/:filename#.+#')
-    def process(filename):
-        """Locally scoped proxy for the actual controller action we 
+    @app.get('/:filename#.+#')
+    def get(filename):
+        """Locally scoped proxy for the actual repo action we 
         wish to call. This evil hack is needed because of functools' 
         poor implementation of update_wrapper. 
         See: 
          - https://github.com/defnull/bottle/issues/223
          - http://bugs.python.org/issue3445"""
-        return ctrl.process(filename)
+        return repo.get(filename)
         
     return app
 
