@@ -5,32 +5,32 @@ import bottle
 
 # default configuration
 _config = {
-    'root_dir': None,
+    'ROOT_DIR': None,
 }
 
 
 class StaticFileRepository:
     """This repository is home to our core business logic"""
     def __init__(self, config):
-        if not os.path.exists(config['root_dir']):
+        if not os.path.exists(config['ROOT_DIR']):
             raise Exception("Crap")
-        self.root_dir = config['root_dir']
+        self.root_dir = config['ROOT_DIR']
     
     def get(self, filename):
         return static_file(filename, root=self.root_dir)
         
 
-def create_app(config={}):
+def create_app(custom_config=None, app=None):
     """App factory. Builds an instance of the app 
     passing it the config that is provided.
     Since the app object that is created is scoped only to this 
     function, it is possible to have multiple instances that do 
     not mess with each other."""
-    cfg = _config.copy()
-    cfg.update(config)
+    config = _config.copy()
+    if custom_config: config.update(custom_config)
+    if not app: app = Bottle()
     
-    app = Bottle()
-    repo = StaticFileRepository(cfg)
+    repo = StaticFileRepository(config)
     
     @app.get('/:filename#.+#')
     def get(filename):
@@ -52,7 +52,7 @@ def main(argv):
         root_dir = os.path.abspath('.')
     
     print 'serving files in: ', root_dir
-    app = create_app({'root_dir': root_dir})
+    app = create_app({'ROOT_DIR': root_dir})
     bottle.run(app)
 
     
