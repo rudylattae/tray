@@ -8,12 +8,12 @@ _config = {
     'ROOT_DIR': None,
 }
 
-
+    
 class StaticFileRepository:
     """This repository is home to our core business logic"""
     def __init__(self, config):
         if not os.path.exists(config['ROOT_DIR']):
-            raise Exception("Crap")
+            raise ValueError('Root directory %s not found' % config['ROOT_DIR'])
         self.root_dir = config['ROOT_DIR']
 
     def get(self, filename):
