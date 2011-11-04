@@ -1,3 +1,5 @@
+import bottle
+from bottle import static_file
 from bottle.ext.servefiles import StaticFileRepository
 import fudge
 
@@ -27,3 +29,19 @@ class describe_creating_an_instance:
         repo = StaticFileRepository(config)
         
         assert repo.root_dir == config['ROOT_DIR']
+
+
+class describe_get:
+    @fudge.patch('os.path.exists', 'bottle.static_file')
+    def it_delegates_to_bottle_to_serve_the_requested_file(self, mock_path_exists, mock_bottle_staticfile):
+        config = {'ROOT_DIR': '/valid/path'}
+        expected_filename = 'my_file.txt'
+        mock_path_exists.expects_call() \
+            .with_args(config['ROOT_DIR']) \
+            .returns(True)
+        mock_bottle_staticfile.is_callable().expects_call() \
+            .with_args(expected_filename, root=config['ROOT_DIR']) \
+            .returns("")
+        repo = StaticFileRepository(config)
+        
+        repo.get(expected_filename)

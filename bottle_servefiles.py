@@ -1,5 +1,5 @@
 import os
-from bottle import Bottle, static_file
+from bottle import Bottle
 import bottle
 
 
@@ -17,7 +17,7 @@ class StaticFileRepository:
         self.root_dir = config['ROOT_DIR']
 
     def get(self, filename):
-        return static_file(filename, root=self.root_dir)
+        return bottle.static_file(filename, root=self.root_dir)
 
 
 def create_app(custom_config=None, app=None):
