@@ -6,7 +6,9 @@ import bottle
 # default configuration
 _config = {
     'ROOT_DIR': None,
-    'DEFAULT_INDEX': 'index.html'
+    'URL_MAPS': { 
+        '/': 'index.html'
+     }
 }
 
     
@@ -17,9 +19,11 @@ class BottleStaticFileBucket:
         if not os.path.exists(config['ROOT_DIR']):
             raise ValueError('Root directory %s not found' % config['ROOT_DIR'])
         self.root_dir = config['ROOT_DIR']
-        self.default_index = config.get('DEFAULT_INDEX')
+        self.url_maps = config.get('URL_MAPS', [])
 
     def get(self, filename):
+        if (filename in self.url_maps):
+            filename = self.url_maps[filename]
         return bottle.static_file(filename, root=self.root_dir)
     
 
@@ -40,7 +44,7 @@ def create_app(custom_config=None, app=None):
     @app.get('/')
     def index():
         """Serves the default index file if available"""
-        return repo.get(repo.default_index)
+        return repo.get('/')
     
     @app.get('/:filename#.+#')
     def get(filename):
