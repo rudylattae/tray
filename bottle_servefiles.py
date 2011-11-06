@@ -9,8 +9,9 @@ _config = {
 }
 
     
-class StaticFileRepository:
-    """This repository is home to our core business logic"""
+class BottleStaticFileBucket:
+    """A basic container for working with local static files that
+    implements the Bucket molten interface."""
     def __init__(self, config):
         if not os.path.exists(config['ROOT_DIR']):
             raise ValueError('Root directory %s not found' % config['ROOT_DIR'])
@@ -18,7 +19,7 @@ class StaticFileRepository:
 
     def get(self, filename):
         return bottle.static_file(filename, root=self.root_dir)
-
+    
 
 def create_app(custom_config=None, app=None):
     """App factory. Builds an instance of the app
@@ -32,7 +33,7 @@ def create_app(custom_config=None, app=None):
     if not app:
         app = Bottle()
 
-    repo = StaticFileRepository(config)
+    repo = BottleStaticFileBucket(config)
 
     @app.get('/:filename#.+#')
     def get(filename):
