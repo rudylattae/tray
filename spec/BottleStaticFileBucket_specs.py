@@ -31,6 +31,20 @@ class describe_creating_an_instance:
         
         assert repo.root_dir == config['ROOT_DIR']
 
+    @fudge.patch('os.path.exists')
+    def it_sets_the_default_index_if_provided(self, mock_path_exists):
+        config = {
+            'ROOT_DIR': '/valid/path',
+            'DEFAULT_INDEX': 'index.html'
+        }
+        mock_path_exists.expects_call() \
+            .with_args(config['ROOT_DIR']) \
+            .returns(True)
+        
+        repo = BottleStaticFileBucket(config)
+        
+        assert repo.default_index == config['DEFAULT_INDEX']
+
 
 class describe_get:
     @fudge.patch('os.path.exists', 'bottle.static_file')
