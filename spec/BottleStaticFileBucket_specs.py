@@ -54,7 +54,7 @@ class describe_get:
         mock_path_exists.expects_call() \
             .with_args(config['ROOT_DIR']) \
             .returns(True)
-        mock_bottle_staticfile.is_callable().expects_call() \
+        mock_bottle_staticfile.expects_call() \
             .with_args(expected_filename, root=config['ROOT_DIR']) \
             .returns("")
         repo = BottleStaticFileBucket(config)
@@ -70,7 +70,7 @@ class describe_get:
         expected_filename = 'index.html'
         mock_path_exists.expects_call() \
             .returns(True)
-        mock_bottle_staticfile.is_callable() \
+        mock_bottle_staticfile.expects_call() \
             .with_args(expected_filename, root=config['ROOT_DIR']) \
             .returns("")
         repo = BottleStaticFileBucket(config)
