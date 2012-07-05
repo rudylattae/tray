@@ -1,7 +1,7 @@
 import os
 from setuptools import setup
 
-version = '0.2.0dev'
+version = '0.3.0dev'
 long_description = '\n\n'.join([
     open('README.rst').read(),
     open('CHANGES.txt').read()
@@ -28,5 +28,5 @@ setup(
     ],
     py_modules = ['bottle_servefiles'],
     zip_safe = False,
-    install_requires = [],
+    install_requires = ['bottle'],
 )

@@ -41,13 +41,10 @@ def create_app(custom_config=None, app=None):
 
     repo = BottleStaticFileBucket(config)
 
-    @app.get('/')
-    def index():
-        """Serves the default index file if available"""
-        return repo.get('/')
     
-    @app.get('/:filename#.+#')
-    def get(filename):
+    @app.get('/')
+    @app.get('/:uri#.+#')
+    def get(filename='/'):
         """Locally scoped proxy for the actual repo action we
         wish to call. This is needed because of functools'
         poor implementation of update_wrapper.
@@ -57,6 +54,13 @@ def create_app(custom_config=None, app=None):
          """
         return repo.get(filename)
 
+    @app.put('/uri#.+#')
+    def put(filename):
+        """Serves the default index file if available"""
+        return repo.get('/')
+    
+    if config.delete:
+        app.route('DELETE')
     return app
 
 
