@@ -1,3 +1,4 @@
+bottle==0.10.11
 checkit==0.3.2b
 fudge==1.0.3
 pep8==0.6.1

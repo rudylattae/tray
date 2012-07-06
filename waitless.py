@@ -5,7 +5,7 @@ import bottle
 
 # default configuration
 _config = {
-    'ROOT_DIR': None,
+    'ROOT_DIR': os.getcwd(),
     'URL_MAPS': { 
         '/': 'index.html'
      }
@@ -34,17 +34,16 @@ def create_app(custom_config=None, app=None):
     function, it is possible to have multiple instances that do
     not mess with each other."""
     config = _config.copy()
-    if custom_config:
-        config.update(custom_config)
-    if not app:
-        app = Bottle()
+    if custom_config: config.update(custom_config)
+    if not app: app = Bottle()
+    app.config.update(config)
 
     repo = BottleStaticFileBucket(config)
 
     
     @app.get('/')
-    @app.get('/:uri#.+#')
-    def get(filename='/'):
+    @app.get('/<uri:path>')
+    def get(uri='/'):
         """Locally scoped proxy for the actual repo action we
         wish to call. This is needed because of functools'
         poor implementation of update_wrapper.
@@ -52,15 +51,8 @@ def create_app(custom_config=None, app=None):
          - https://github.com/defnull/bottle/issues/223
          - http://bugs.python.org/issue3445
          """
-        return repo.get(filename)
-
-    @app.put('/uri#.+#')
-    def put(filename):
-        """Serves the default index file if available"""
-        return repo.get('/')
+        return repo.get(uri)
     
-    if config.delete:
-        app.route('DELETE')
     return app
 
 
