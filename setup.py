@@ -1,16 +1,16 @@
 import os
 from setuptools import setup
 
-version = '0.3.0dev'
+version = '0.4.0dev'
 long_description = '\n\n'.join([
     open('README.rst').read(),
     open('CHANGES.txt').read()
 ])
 
 setup(
-    name = "bottle-servefiles",
+    name = "waitless",
     version = version,
-    description = "A reusable app that serves static files for bottle apps",
+    description = "A bottle-wsgi pluggable app that serves static files for",
     long_description = long_description,
     author = "Rudy Lattae",
     author_email = "rudylattae@gmail.com",
@@ -26,7 +26,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
     ],
-    py_modules = ['bottle_servefiles'],
+    py_modules = ['waitless'],
     zip_safe = False,
     install_requires = ['bottle'],
 )
