@@ -1,8 +1,8 @@
 import os
+import fudge
 import bottle
 from bottle import static_file
-from bottle.ext.servefiles import BottleStaticFileBucket
-import fudge
+from waitless import BottleStaticFileBucket
 
 
 class describe_creating_an_instance:
