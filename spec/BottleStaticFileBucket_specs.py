@@ -2,7 +2,7 @@ import os
 import fudge
 import bottle
 from bottle import static_file
-from waitless import BottleStaticFileBucket
+from tray import BottleStaticFileBucket
 
 
 class describe_creating_an_instance:

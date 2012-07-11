@@ -1,4 +1,4 @@
-import os
+import os, sys
 from bottle import Bottle
 import bottle
 
@@ -44,25 +44,18 @@ def create_app(custom_config=None, app=None):
     @app.get('/')
     @app.get('/<uri:path>')
     def get(uri='/'):
-        """Locally scoped proxy for the actual repo action we
-        wish to call. This is needed because of functools'
-        poor implementation of update_wrapper.
-        See:
-         - https://github.com/defnull/bottle/issues/223
-         - http://bugs.python.org/issue3445
-         """
         return repo.get(uri)
     
     return app
 
 
-def main(argv):
+def main(argv = []):
     if len(sys.argv) > 1:
         root_dir = os.path.abspath(sys.argv[1])
     else:
         root_dir = os.path.abspath('.')
 
-    print 'serving files in: ', root_dir
+    print 'Tray is serving files in: ', root_dir
     app = create_app({'ROOT_DIR': root_dir})
     bottle.run(app)
 
